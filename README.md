@@ -1,4 +1,4 @@
-# MSRF: Multi-Space Random Features for Time Series Classification
+# MSRF: Multi-Space Random Features for Time Series
 
 MSRF distributes random features across four complementary representation spaces for time series classification:
 
