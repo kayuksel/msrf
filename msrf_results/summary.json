@@ -1,0 +1,48 @@
+{
+  "n_datasets": 112,
+  "configs": [
+    "CRF_700",
+    "CRF_only",
+    "GRF_only",
+    "MSRF_full",
+    "Rocket_full",
+    "Rocket_full+MSRF",
+    "Rocket_pm+MSRF",
+    "Rocket_ppv",
+    "Rocket_ppv+MSRF",
+    "Rocket_ppv+mpv",
+    "SRF_only",
+    "TRF+GRF+SRF",
+    "TRF_only"
+  ],
+  "avg_ranks": {
+    "Rocket_full": 3.4642857142857144,
+    "Rocket_full+MSRF": 3.919642857142857,
+    "Rocket_ppv+MSRF": 6.375,
+    "Rocket_pm+MSRF": 4.642857142857143,
+    "Rocket_ppv": 7.169642857142857,
+    "Rocket_ppv+mpv": 5.857142857142857,
+    "CRF_700": 5.357142857142857,
+    "CRF_only": 5.946428571428571,
+    "MSRF_full": 5.339285714285714,
+    "SRF_only": 10.794642857142858,
+    "TRF+GRF+SRF": 9.491071428571429,
+    "GRF_only": 11.892857142857142,
+    "TRF_only": 10.75
+  },
+  "mean_accuracy": {
+    "CRF_700": 0.8065294933051675,
+    "CRF_only": 0.8042839729765106,
+    "GRF_only": 0.5424183589483192,
+    "MSRF_full": 0.8079711335083386,
+    "Rocket_full": 0.831983043742601,
+    "Rocket_full+MSRF": 0.8324503701261544,
+    "Rocket_pm+MSRF": 0.8177067591885939,
+    "Rocket_ppv": 0.7942004604819094,
+    "Rocket_ppv+MSRF": 0.8028311438935953,
+    "Rocket_ppv+mpv": 0.8153479753056939,
+    "SRF_only": 0.6529937527112033,
+    "TRF+GRF+SRF": 0.7307390006507297,
+    "TRF_only": 0.6678241558420233
+  }
+}
