@@ -1,0 +1,128 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{dempster2020rocket}
+\citation{dempster2021minirocket}
+\citation{tan2022multirocket}
+\citation{dempster2023hydra}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{rahimi2007random}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{2}{section.2}\protected@file@percent }
+\newlabel{sec:background}{{2}{2}{Background}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Random Kitchen Sinks}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}ROCKET as Random Features}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Multi-Space Random Features}{2}{section.3}\protected@file@percent }
+\newlabel{sec:method}{{3}{2}{Multi-Space Random Features}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Temporal Random Features (TRF)}{2}{subsection.3.1}\protected@file@percent }
+\newlabel{eq:trf}{{4}{2}{Temporal Random Features (TRF)}{equation.3.4}{}}
+\citation{dempster2021minirocket}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Global Random Features (GRF)}{3}{subsection.3.2}\protected@file@percent }
+\newlabel{eq:grf}{{6}{3}{Global Random Features (GRF)}{equation.3.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Statistical Random Features (SRF)}{3}{subsection.3.3}\protected@file@percent }
+\newlabel{eq:srf}{{8}{3}{Statistical Random Features (SRF)}{equation.3.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Convolutional Random Features (CRF)}{3}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}The Combined Representation}{3}{subsection.3.5}\protected@file@percent }
+\citation{rahimi2007random}
+\citation{dau2019ucr}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Orthogonality of MSRF feature spaces. Each type captures a different axis of variation and is invariant to different properties.}}{4}{table.1}\protected@file@percent }
+\newlabel{tab:orthogonality}{{1}{4}{Orthogonality of MSRF feature spaces. Each type captures a different axis of variation and is invariant to different properties}{table.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Theoretical Analysis}{4}{section.4}\protected@file@percent }
+\newlabel{sec:theory}{{4}{4}{Theoretical Analysis}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Kernel Combination via Concatenation}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Diversity and Effective Rank}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Computational Complexity}{4}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Computational cost of each feature space. $T$: series length, $l$: kernel length, $D$: GRF embedding dimension, $M$: number of summary statistics.}}{4}{table.2}\protected@file@percent }
+\newlabel{tab:complexity}{{2}{4}{Computational cost of each feature space. $T$: series length, $l$: kernel length, $D$: GRF embedding dimension, $M$: number of summary statistics}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Ablation study on the UCR archive (112 datasets). Average rank computed across all 13 configurations. Mean accuracy is the arithmetic mean of per-dataset test accuracies.}}{5}{table.3}\protected@file@percent }
+\newlabel{tab:ablation}{{3}{5}{Ablation study on the UCR archive (112 datasets). Average rank computed across all 13 configurations. Mean accuracy is the arithmetic mean of per-dataset test accuracies}{table.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experiments}{5}{section.5}\protected@file@percent }
+\newlabel{sec:experiments}{{5}{5}{Experiments}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Experimental Setup}{5}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Ablation: Contribution of Each Feature Space}{5}{subsection.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Complementarity test on 112 UCR datasets. Win/Tie/Loss counts for adding 410 MSRF features (TRF+GRF+SRF) to each ROCKET variant. A ``win'' means the augmented method achieves strictly higher accuracy.}}{6}{table.4}\protected@file@percent }
+\newlabel{tab:complementarity}{{4}{6}{Complementarity test on 112 UCR datasets. Win/Tie/Loss counts for adding 410 MSRF features (TRF+GRF+SRF) to each ROCKET variant. A ``win'' means the augmented method achieves strictly higher accuracy}{table.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Critical difference diagram for the complementarity experiment (112 UCR datasets, Nemenyi test at $\alpha {=}0.05$). Each ROCKET variant is shown alongside its MSRF-augmented counterpart. Adding 410 non-convolutional MSRF features consistently improves rank, with the largest gain for Rocket\textsubscript  {ppv} (rank 6.0$\to $5.0). Methods connected by a bar are not significantly different.}}{6}{figure.1}\protected@file@percent }
+\newlabel{fig:cd_complementarity}{{1}{6}{Critical difference diagram for the complementarity experiment (112 UCR datasets, Nemenyi test at $\alpha {=}0.05$). Each ROCKET variant is shown alongside its MSRF-augmented counterpart. Adding 410 non-convolutional MSRF features consistently improves rank, with the largest gain for Rocket\textsubscript {ppv} (rank 6.0$\to $5.0). Methods connected by a bar are not significantly different}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Complementarity with ROCKET}{6}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:complementarity}{{5.3}{6}{Complementarity with ROCKET}{subsection.5.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Critical difference diagram comparing MSRF\textsubscript  {full} (1{,}410 dims) against ROCKET baselines and convolutional-only configurations (112 datasets). MSRF\textsubscript  {full} achieves a competitive rank despite using 7--43$\times $ fewer features than the ROCKET variants.}}{7}{figure.2}\protected@file@percent }
+\newlabel{fig:cd_msrf_vs_rocket}{{2}{7}{Critical difference diagram comparing MSRF\textsubscript {full} (1{,}410 dims) against ROCKET baselines and convolutional-only configurations (112 datasets). MSRF\textsubscript {full} achieves a competitive rank despite using 7--43$\times $ fewer features than the ROCKET variants}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Feature Efficiency: Diversity vs.\ Scale}{7}{subsection.5.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Feature efficiency at ${\sim }1{,}400$ dimensions (112 UCR datasets).}}{7}{table.5}\protected@file@percent }
+\newlabel{tab:efficiency}{{5}{7}{Feature efficiency at ${\sim }1{,}400$ dimensions (112 UCR datasets)}{table.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}MSRF\textsubscript  {full} vs.\ ROCKET Baselines}{7}{subsection.5.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces MSRF\textsubscript  {full} (1{,}410 dims) vs.\ ROCKET baselines (112 datasets). MSRF uses 7--43$\times $ fewer features.}}{7}{table.6}\protected@file@percent }
+\newlabel{tab:msrf_vs_rocket}{{6}{7}{MSRF\textsubscript {full} (1{,}410 dims) vs.\ ROCKET baselines (112 datasets). MSRF uses 7--43$\times $ fewer features}{table.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Timing}{8}{subsection.5.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Typical extraction and classification times (GPU feature extraction, CPU Ridge).}}{8}{table.7}\protected@file@percent }
+\newlabel{tab:timing}{{7}{8}{Typical extraction and classification times (GPU feature extraction, CPU Ridge)}{table.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}Per-Dataset Analysis}{8}{subsection.5.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Top 10 accuracy improvements from Rocket\textsubscript  {ppv} $\to $ Rocket\textsubscript  {ppv}+MSRF, and the 5 largest losses.}}{8}{table.8}\protected@file@percent }
+\newlabel{tab:top_improvements}{{8}{8}{Top 10 accuracy improvements from Rocket\textsubscript {ppv} $\to $ Rocket\textsubscript {ppv}+MSRF, and the 5 largest losses}{table.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{8}{section.6}\protected@file@percent }
+\newlabel{sec:discussion}{{6}{8}{Discussion}{section.6}{}}
+\citation{dempster2020rocket}
+\citation{dempster2021minirocket}
+\citation{tan2022multirocket}
+\citation{dempster2023hydra}
+\citation{rahimi2007random,rahimi2008weighted}
+\citation{le2013fastfood}
+\citation{ton2018spatial}
+\citation{vaswani2017attention}
+\citation{luong2015effective,graves2013generating}
+\citation{ye2009shapelets}
+\citation{lubba2019catch22}
+\citation{christ2018tsfresh}
+\citation{mallat2012group}
+\bibstyle{plainnat}
+\bibdata{references}
+\bibcite{christ2018tsfresh}{{1}{2018}{{Christ et~al.}}{{Christ, Braun, Neuffer, and Kempa-Liehr}}}
+\bibcite{dau2019ucr}{{2}{2019}{{Dau et~al.}}{{Dau, Bagnall, Kamgar, Yeh, Zhu, Gharghabi, Ratanamahatana, and Keogh}}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{9}{section.7}\protected@file@percent }
+\newlabel{sec:related}{{7}{9}{Related Work}{section.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{9}{section.8}\protected@file@percent }
+\newlabel{sec:conclusion}{{8}{9}{Conclusion}{section.8}{}}
+\bibcite{dempster2020rocket}{{3}{2020}{{Dempster et~al.}}{{Dempster, Petitjean, and Webb}}}
+\bibcite{dempster2021minirocket}{{4}{2021}{{Dempster et~al.}}{{Dempster, Schmidt, and Webb}}}
+\bibcite{dempster2023hydra}{{5}{2023}{{Dempster et~al.}}{{Dempster, Schmidt, and Webb}}}
+\bibcite{graves2013generating}{{6}{2013}{{Graves}}{{}}}
+\bibcite{le2013fastfood}{{7}{2013}{{Le et~al.}}{{Le, Sarl{\'o}s, and Smola}}}
+\bibcite{lubba2019catch22}{{8}{2019}{{Lubba et~al.}}{{Lubba, Sethi, Knaute, Schultz, Fulcher, and Jones}}}
+\bibcite{luong2015effective}{{9}{2015}{{Luong et~al.}}{{Luong, Pham, and Manning}}}
+\bibcite{mallat2012group}{{10}{2012}{{Mallat}}{{}}}
+\bibcite{rahimi2007random}{{11}{2007}{{Rahimi and Recht}}{{}}}
+\bibcite{rahimi2008weighted}{{12}{2008}{{Rahimi and Recht}}{{}}}
+\bibcite{tan2022multirocket}{{13}{2022}{{Tan et~al.}}{{Tan, Dempster, Bergmeir, and Webb}}}
+\bibcite{ton2018spatial}{{14}{2018}{{Ton et~al.}}{{Ton, Flaxman, Sejdinovic, and Bhatt}}}
+\bibcite{vaswani2017attention}{{15}{2017}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin}}}
+\bibcite{ye2009shapelets}{{16}{2009}{{Ye and Keogh}}{{}}}
+\citation{dempster2021minirocket}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Implementation Details}{11}{appendix.A}\protected@file@percent }
+\newlabel{app:implementation}{{A}{11}{Implementation Details}{appendix.A}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Temporal Random Feature Computation}{11}{subsection.A.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Global Random Feature Computation}{11}{subsection.A.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Statistical Random Feature Computation}{11}{subsection.A.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Convolutional Random Feature Computation}{11}{subsection.A.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}Full Pipeline}{11}{subsection.A.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Additional Critical Difference Diagrams}{11}{appendix.B}\protected@file@percent }
+\newlabel{app:cd_diagrams}{{B}{11}{Additional Critical Difference Diagrams}{appendix.B}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Critical difference diagram for all 13 configurations (112 UCR datasets, Nemenyi test at $\alpha {=}0.05$). MSRF-augmented variants (red labels) consistently rank higher than their non-augmented counterparts. The individual non-convolutional spaces (TRF, GRF, SRF) rank lowest, confirming that their value lies in combination.}}{12}{figure.3}\protected@file@percent }
+\newlabel{fig:cd_full}{{3}{12}{Critical difference diagram for all 13 configurations (112 UCR datasets, Nemenyi test at $\alpha {=}0.05$). MSRF-augmented variants (red labels) consistently rank higher than their non-augmented counterparts. The individual non-convolutional spaces (TRF, GRF, SRF) rank lowest, confirming that their value lies in combination}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Critical difference diagram for the feature efficiency comparison (112 datasets). MSRF\textsubscript  {full} (500 conv + 410 non-conv = 1{,}410 dims), CRF\textsubscript  {700} (700 conv $\times $ 2 = 1{,}400 dims), and CRF\textsubscript  {only} (500 conv $\times $ 2 = 1{,}000 dims). At a matched dimensionality budget, multi-space allocation ranks first.}}{12}{figure.4}\protected@file@percent }
+\newlabel{fig:cd_efficiency}{{4}{12}{Critical difference diagram for the feature efficiency comparison (112 datasets). MSRF\textsubscript {full} (500 conv + 410 non-conv = 1{,}410 dims), CRF\textsubscript {700} (700 conv $\times $ 2 = 1{,}400 dims), and CRF\textsubscript {only} (500 conv $\times $ 2 = 1{,}000 dims). At a matched dimensionality budget, multi-space allocation ranks first}{figure.4}{}}
+\gdef \@abspage@last{12}

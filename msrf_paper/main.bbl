@@ -1,0 +1,117 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Christ et~al.(2018)Christ, Braun, Neuffer, and
+  Kempa-Liehr]{christ2018tsfresh}
+Maximilian Christ, Nils Braun, Julius Neuffer, and Andreas~Wilhelm Kempa-Liehr.
+\newblock Time series feature extraction on basis of scalable hypothesis tests
+  ({TSFresh}--a {Python} library).
+\newblock \emph{Neurocomputing}, 307:\penalty0 72--77, 2018.
+
+\bibitem[Dau et~al.(2019)Dau, Bagnall, Kamgar, Yeh, Zhu, Gharghabi,
+  Ratanamahatana, and Keogh]{dau2019ucr}
+Hoang~Anh Dau, Anthony Bagnall, Kaveh Kamgar, Chin-Chia~Michael Yeh, Yan Zhu,
+  Shaghayegh Gharghabi, Chotirat~Ann Ratanamahatana, and Eamonn Keogh.
+\newblock The {UCR} time series archive.
+\newblock \emph{IEEE/CAA Journal of Automatica Sinica}, 6\penalty0
+  (6):\penalty0 1293--1305, 2019.
+
+\bibitem[Dempster et~al.(2020)Dempster, Petitjean, and
+  Webb]{dempster2020rocket}
+Angus Dempster, Fran{\c{c}}ois Petitjean, and Geoffrey~I Webb.
+\newblock {ROCKET}: Exceptionally fast and accurate time series classification
+  using random convolutional kernels.
+\newblock \emph{Data Mining and Knowledge Discovery}, 34\penalty0 (5):\penalty0
+  1454--1495, 2020.
+
+\bibitem[Dempster et~al.(2021)Dempster, Schmidt, and
+  Webb]{dempster2021minirocket}
+Angus Dempster, Daniel~F Schmidt, and Geoffrey~I Webb.
+\newblock {MiniRocket}: A very fast (almost) deterministic transform for time
+  series classification.
+\newblock In \emph{Proceedings of the 27th ACM SIGKDD Conference on Knowledge
+  Discovery \& Data Mining}, pages 248--257, 2021.
+
+\bibitem[Dempster et~al.(2023)Dempster, Schmidt, and Webb]{dempster2023hydra}
+Angus Dempster, Daniel~F Schmidt, and Geoffrey~I Webb.
+\newblock {HYDRA}: Competing convolutional kernels for fast and accurate time
+  series classification.
+\newblock \emph{Data Mining and Knowledge Discovery}, 37:\penalty0 1779--1805,
+  2023.
+
+\bibitem[Graves(2013)]{graves2013generating}
+Alex Graves.
+\newblock Generating sequences with recurrent neural networks.
+\newblock \emph{arXiv preprint arXiv:1308.0850}, 2013.
+
+\bibitem[Le et~al.(2013)Le, Sarl{\'o}s, and Smola]{le2013fastfood}
+Quoc Le, Tam{\'a}s Sarl{\'o}s, and Alex Smola.
+\newblock Fastfood---approximating kernel expansions in loglinear time.
+\newblock In \emph{Proceedings of the 30th International Conference on Machine
+  Learning}, pages 244--252, 2013.
+
+\bibitem[Lubba et~al.(2019)Lubba, Sethi, Knaute, Schultz, Fulcher, and
+  Jones]{lubba2019catch22}
+Carl~H Lubba, Sarab~S Sethi, Philip Knaute, Simon~R Schultz, Ben~D Fulcher, and
+  Nick~S Jones.
+\newblock catch22: {CAN}onical {T}ime-series {CH}aracteristics.
+\newblock \emph{Data Mining and Knowledge Discovery}, 33\penalty0 (6):\penalty0
+  1821--1852, 2019.
+
+\bibitem[Luong et~al.(2015)Luong, Pham, and Manning]{luong2015effective}
+Minh-Thang Luong, Hieu Pham, and Christopher~D Manning.
+\newblock Effective approaches to attention-based neural machine translation.
+\newblock In \emph{Proceedings of the 2015 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1412--1421, 2015.
+
+\bibitem[Mallat(2012)]{mallat2012group}
+St{\'e}phane Mallat.
+\newblock Group invariant scattering.
+\newblock \emph{Communications on Pure and Applied Mathematics}, 65\penalty0
+  (10):\penalty0 1331--1398, 2012.
+
+\bibitem[Rahimi and Recht(2007)]{rahimi2007random}
+Ali Rahimi and Benjamin Recht.
+\newblock Random features for large-scale kernel machines.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~20, 2007.
+
+\bibitem[Rahimi and Recht(2008)]{rahimi2008weighted}
+Ali Rahimi and Benjamin Recht.
+\newblock Weighted sums of random kitchen sinks: Replacing minimization with
+  randomization in learning.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~21, 2008.
+
+\bibitem[Tan et~al.(2022)Tan, Dempster, Bergmeir, and Webb]{tan2022multirocket}
+Chang~Wei Tan, Angus Dempster, Christoph Bergmeir, and Geoffrey~I Webb.
+\newblock {MultiRocket}: Multiple pooling operators and transformations for
+  fast and effective time series classification.
+\newblock \emph{Data Mining and Knowledge Discovery}, 36\penalty0 (5):\penalty0
+  1623--1646, 2022.
+
+\bibitem[Ton et~al.(2018)Ton, Flaxman, Sejdinovic, and Bhatt]{ton2018spatial}
+Jean-Francois Ton, Seth Flaxman, Dino Sejdinovic, and Samir Bhatt.
+\newblock Spatial mapping with {G}aussian processes and nonstationary {F}ourier
+  features.
+\newblock \emph{Spatial Statistics}, 28:\penalty0 59--78, 2018.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~30, 2017.
+
+\bibitem[Ye and Keogh(2009)]{ye2009shapelets}
+Lexiang Ye and Eamonn Keogh.
+\newblock Time series shapelets: A new primitive for data mining.
+\newblock In \emph{Proceedings of the 15th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, pages 947--956, 2009.
+
+\end{thebibliography}
