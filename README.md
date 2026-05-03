@@ -2,7 +2,7 @@
 
 MSRF distributes random features across four complementary representation spaces for time series classification:
 
-| Space | Captures | Invariant to |
+| Space | Captures | Invariant to | 
 |---|---|---|
 | **Temporal (TRF)** | Positional signal structure | Signal shape |
 | **Global (GRF)** | Sequence-level geometry | Position, local pattern |
