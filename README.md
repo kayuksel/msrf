@@ -9,7 +9,7 @@ MSRF distributes random features across four complementary representation spaces
 | **Statistical (SRF)** | Distributional properties | Temporal ordering |
 | **Convolutional (CRF)** | Local pattern occurrence | Absolute position |
 
-By spanning orthogonal axes of variation,. MSRF achieves competitive accuracy with ROCKET-family methods using far fewer features, and provides genuinely complementary signal when combined with existing convolutional pipelines.
+By spanning orthogonal axes of variation, MSRF achieves competitive accuracy with ROCKET-family methods using far fewer features, and provides genuinely complementary signal when combined with existing convolutional pipelines.
 
 ## Key Results (112 UCR datasets, Ridge classifier)
 
