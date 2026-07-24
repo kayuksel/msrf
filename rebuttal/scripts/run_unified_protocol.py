@@ -49,10 +49,32 @@ def msrfstar_feats(Xtr, Xte):
             np.concatenate([Zte, battery(Zte, B)], 1))
 
 
+def msrfc_feats(Xtr, Xte):
+    """MSRF*C: the framework's convolutional space upgraded from random kernels to a compact
+    canonical MiniRocket dictionary (1,512 kernels, aeon implementation) + the 760-dim MSRF*
+    embedding = 2,272 dims. Note: inherits MiniRocket's per-dataset fitted bias quantiles."""
+    from aeon.transformations.collection.convolution_based import MiniRocket
+    mr = MiniRocket(n_kernels=1512, random_state=0)
+    Mtr = np.nan_to_num(np.asarray(mr.fit_transform(Xtr[:, None, :])))
+    Mte = np.nan_to_num(np.asarray(mr.transform(Xte[:, None, :])))
+    Str, Ste = msrfstar_feats(Xtr, Xte)
+    return np.concatenate([Mtr, Str], 1), np.concatenate([Mte, Ste], 1)
+
+
+def mr1512_feats(Xtr, Xte):
+    """MSRF*C's convolutional component alone (ablation reference)."""
+    from aeon.transformations.collection.convolution_based import MiniRocket
+    mr = MiniRocket(n_kernels=1512, random_state=0)
+    return (np.nan_to_num(np.asarray(mr.fit_transform(Xtr[:, None, :]))),
+            np.nan_to_num(np.asarray(mr.transform(Xte[:, None, :]))))
+
+
 METHODS = {
     "MSRF-1410": msrf1410_feats,
     "MSRF+519": msrfplus_feats,
     "MSRF*760": msrfstar_feats,
+    "MSRF*C2272": msrfc_feats,
+    "MiniRocket-1512": mr1512_feats,
 }
 
 

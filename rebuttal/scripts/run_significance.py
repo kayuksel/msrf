@@ -29,7 +29,10 @@ uni = rows("unified_protocol_results.jsonl")
 for a, b in [("MSRF-1410", "catch22"), ("MSRF-1410", "MiniRocket"),
              ("MSRF+519", "MiniRocket"), ("MSRF*760", "MSRF+519"),
              ("MSRF*760", "MiniRocket"), ("MSRF*760", "QUANT"),
-             ("MSRF*760", "Hydra"), ("MiniRocket", "Rocket10k-ppvmax")]:
+             ("MSRF*760", "Hydra"), ("MiniRocket", "Rocket10k-ppvmax"),
+             ("MSRF*C2272", "Hydra"), ("MSRF*C2272", "MiniRocket"),
+             ("MSRF*C2272", "MiniRocket-1512"), ("MSRF*C2272", "QUANT"),
+             ("MSRF*C2272", "MultiRocket")]:
     test(uni, a, b)
 
 print("\n== Table R3: combination gains (52-dataset subset) ==")

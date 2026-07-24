@@ -11,21 +11,25 @@ MSRF distributes random features across four complementary representation spaces
 
 By spanning orthogonal axes of variation, MSRF offers the best measured accuracy-per-dimension at compact budgets (below ~5,000 dims) with the fastest transform we measured, and provides complementary signal when combined with quantile-based methods and plain random convolutional banks.
 
-## Key Results (UCR archive, unified RidgeClassifierCV protocol)
+## Key Results (113 equal-length UCR datasets, unified RidgeClassifierCV protocol)
 
 See **[`rebuttal/README.md`](rebuttal/README.md)** for the full author-response experiments: improved
-configurations (MSRF+ 519d, MSRF* 760d), comparisons against canonical MiniRocket, MultiRocket, Hydra,
-and QUANT under one harness, significance tests, combination experiments, and reproduction scripts.
+configurations (MSRF+ 519d, MSRF* 760d, MSRF*C 2,272d), comparisons against canonical MiniRocket,
+MultiRocket, Hydra, and QUANT under one harness, significance tests, combination experiments,
+saturation analyses, and reproduction scripts.
 
-- **Compact frontier**: MSRF* (760 dims) is the most accurate transform below Hydra's 5,120 dims and
-  the fastest measured (0.5 ms/series, single core); it significantly outperforms QUANT (+0.029,
-  p=0.002) at one-third the dimensions.
+- **MSRF*C (2,272 dims)**: significantly more accurate than Hydra (+0.008, p=0.042) at 44% of its
+  dimensions and ~18x its transform speed; statistically tied with canonical MiniRocket at 23% of
+  its dimensions; second overall behind only MultiRocket (22x the dimensions).
+- **Universal configurations**: MSRF+ (519d) and MSRF* (760d) have zero fitted parameters and are
+  the fastest transforms measured (0.11 / 0.19 ms/series); MSRF* significantly outperforms QUANT
+  (+0.026, p=0.004) at one third of its dimensions.
 - **Combination gains, scoped**: appended MSRF features significantly improve QUANT and plain
-  random-kernel banks (+0.011 to +0.015, p<=0.007); on top of data-fitted convolutional dictionaries
-  (canonical MiniRocket) or 50k-dim transforms they are saturated — measured and stated.
+  random-kernel banks (+0.011 to +0.015); on top of full-scale fitted dictionaries they are
+  saturated - measured and stated.
 - **Baseline correction**: the internal 10k baseline previously described as "equivalent to
-  MiniRocket" is ROCKET-style (random kernels); canonical MiniRocket is +0.039 stronger (p=1.1e-7).
-  All results here use canonical baselines.
+  MiniRocket" is ROCKET-style (random kernels); canonical MiniRocket is +0.039 stronger (p=1.3e-8).
+  All results use canonical baselines.
 
 ## Installation
 

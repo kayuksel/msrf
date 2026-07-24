@@ -20,15 +20,16 @@ comp = [json.loads(l) for l in open(os.path.join(RESULTS, "complementarity_resul
 
 # (label, results key, dims at length 256, transform ms/series by run_runtime.py, single core)
 METHODS = [
-    ("MultiRocket", "MultiRocket", 49728, 13),
-    ("MiniRocket", "MiniRocket", 9996, 0.9),
-    ("Hydra", "Hydra", 5120, 15),
-    ("MSRF*", "MSRF*760", 760, 0.5),
-    ("MSRF+", "MSRF+519", 519, 0.3),
-    ("Rocket-10k", "Rocket10k-ppvmax", 10000, 16),
-    ("MSRF-1410", "MSRF-1410", 1410, 3.5),
-    ("QUANT", "QUANT", 2253, 0.9),
-    ("catch22", "catch22", 22, 121),
+    ("MultiRocket", "MultiRocket", 49728, 6.3),
+    ("MSRF*C", "MSRF*C2272", 2272, 0.28),
+    ("MiniRocket", "MiniRocket", 9996, 0.40),
+    ("Hydra", "Hydra", 5120, 5.2),
+    ("MSRF*", "MSRF*760", 760, 0.19),
+    ("MSRF+", "MSRF+519", 519, 0.11),
+    ("Rocket-10k", "Rocket10k-ppvmax", 10000, 5.0),
+    ("MSRF-1410", "MSRF-1410", 1410, 1.3),
+    ("QUANT", "QUANT", 2253, 0.20),
+    ("catch22", "catch22", 22, 0.31),
 ]
 KEYS = [k for _, k, _, _ in METHODS]
 cc = [r for r in uni if all(k in r for k in KEYS)]
@@ -40,13 +41,13 @@ for lbl, k, d, _ in METHODS:
 # ---- fig 1: accuracy vs dimension (Pareto frontier) ----
 fig, ax = plt.subplots(figsize=(7.2, 4.6))
 pts = [(d, acc[k], lbl, ms) for lbl, k, d, ms in METHODS]
-ours = {"MSRF*", "MSRF+", "MSRF-1410"}
+ours = {"MSRF*", "MSRF+", "MSRF-1410", "MSRF*C"}
 # (x multiplier, y offset, ha) per label, tuned to avoid collisions
 OFF = {"MultiRocket": (0.95, 0.004, "right"), "MiniRocket": (1.12, -0.009, "left"),
-       "Hydra": (0.30, 0.003, "left"), "MSRF*": (1.18, 0.002, "left"),
+       "Hydra": (1.15, -0.008, "left"), "MSRF*": (1.18, 0.002, "left"),
        "MSRF+": (0.85, -0.020, "right"), "Rocket-10k": (1.15, -0.004, "left"),
        "MSRF-1410": (0.85, -0.018, "right"), "QUANT": (1.15, -0.010, "left"),
-       "catch22": (1.25, 0.004, "left")}
+       "catch22": (1.25, 0.004, "left"), "MSRF*C": (0.80, 0.005, "right")}
 for d, a, lbl, ms in pts:
     c = "#c62828" if lbl in ours else "#37474f"
     ax.scatter(d, a, s=70, color=c, zorder=3)
