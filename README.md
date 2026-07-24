@@ -9,13 +9,23 @@ MSRF distributes random features across four complementary representation spaces
 | **Statistical (SRF)** | Distributional properties | Temporal ordering |
 | **Convolutional (CRF)** | Local pattern occurrence | Absolute position |
 
-By spanning orthogonal axes of variation, MSRF achieves competitive accuracy with ROCKET-family methods using far fewer features, and provides genuinely complementary signal when combined with existing convolutional pipelines.
+By spanning orthogonal axes of variation, MSRF offers the best measured accuracy-per-dimension at compact budgets (below ~5,000 dims) with the fastest transform we measured, and provides complementary signal when combined with quantile-based methods and plain random convolutional banks.
 
-## Key Results (112 UCR datasets, Ridge classifier)
+## Key Results (UCR archive, unified RidgeClassifierCV protocol)
 
-- **MSRF as ROCKET plug-in**: Adding 410 non-convolutional MSRF features (4% overhead) to MiniRocket's 10,000 features improves accuracy on **67/112 datasets** with only 14 losses (83% win rate).
-- **Feature efficiency**: MSRF with 1,410 features achieves higher mean accuracy than MiniRocket with 10,000 features (0.808 vs 0.794) — **86% fewer dimensions**.
-- **Diversity > scale**: At a matched ~1,400-dim budget, multi-space allocation beats pure convolutional on 59% of datasets.
+See **[`rebuttal/README.md`](rebuttal/README.md)** for the full author-response experiments: improved
+configurations (MSRF+ 519d, MSRF* 760d), comparisons against canonical MiniRocket, MultiRocket, Hydra,
+and QUANT under one harness, significance tests, combination experiments, and reproduction scripts.
+
+- **Compact frontier**: MSRF* (760 dims) is the most accurate transform below Hydra's 5,120 dims and
+  the fastest measured (0.5 ms/series, single core); it significantly outperforms QUANT (+0.029,
+  p=0.002) at one-third the dimensions.
+- **Combination gains, scoped**: appended MSRF features significantly improve QUANT and plain
+  random-kernel banks (+0.011 to +0.015, p<=0.007); on top of data-fitted convolutional dictionaries
+  (canonical MiniRocket) or 50k-dim transforms they are saturated — measured and stated.
+- **Baseline correction**: the internal 10k baseline previously described as "equivalent to
+  MiniRocket" is ROCKET-style (random kernels); canonical MiniRocket is +0.039 stronger (p=1.1e-7).
+  All results here use canonical baselines.
 
 ## Installation
 
@@ -87,7 +97,7 @@ F_augmented = np.hstack([your_rocket_features, F_msrf])
 
 **Statistical Random Features (SRF)** compute summary statistics (mean, std, skew, kurtosis, quantiles, autocorrelation) and pass them through two-layer random projections to capture nonlinear interactions.
 
-**Convolutional Random Features (CRF)** use MiniRocket-style random kernels with configurable transforms and pooling. Equivalent to MiniRocket when using 10K kernels with PPV pooling.
+**Convolutional Random Features (CRF)** use ROCKET-style random kernels (random weights and dilations) with configurable transforms and pooling. Note: this is *not* equivalent to canonical MiniRocket, whose fixed kernel dictionary and data-fitted bias quantiles score higher at the same budget — see `rebuttal/README.md` for the measured comparison.
 
 ## Citation
 
