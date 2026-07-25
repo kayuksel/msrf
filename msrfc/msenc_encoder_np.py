@@ -6,7 +6,7 @@ Mirrors the reference implementation exactly, but with the numpy phi (no torch).
 """
 import os
 import numpy as np
-from msenc_np import WMTransformNP, L
+from .msenc_np import WMTransformNP, L
 
 _BANKS = None      # None -> embedded frozen banks (_banks_data.py); or pass an npz path/dict
 
@@ -40,12 +40,12 @@ class MultiSpaceEncCore:
 
     def __init__(self, banks=_BANKS, pooling="full", backend="numba"):
         if banks is None:
-            from _banks_data import load_banks
+            from ._banks_data import load_banks
             banks = load_banks()
         elif isinstance(banks, str):
             banks = dict(np.load(banks))
         if backend == "numba":
-            from msenc_numba import WMTransformNB
+            from .msenc_numba import WMTransformNB
             self.tf = WMTransformNB(banks)
         else:
             self.tf = WMTransformNP(banks)

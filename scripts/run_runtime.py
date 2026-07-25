@@ -10,12 +10,12 @@ import numpy as np
 warnings.filterwarnings("ignore")
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.join(HERE, "..", ".."))
+sys.path.insert(0, os.path.join(HERE, ".."))  # repo root
 from sklearn.linear_model import RidgeClassifierCV
 from sklearn.preprocessing import StandardScaler
 
-from msenc_encoder_np import MultiSpaceEncCore
-from msrf_battery import make_banks, battery
+from msrfc import MultiSpaceEncCore
+from msrfc import make_banks, battery
 from msrf import MSRFTransform
 
 X = np.random.RandomState(0).randn(200, 256)

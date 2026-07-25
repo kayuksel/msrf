@@ -18,7 +18,7 @@ import numpy as np
 warnings.filterwarnings("ignore")
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.join(HERE, "..", ".."))
+sys.path.insert(0, os.path.join(HERE, ".."))  # repo root
 import ucr_io
 from msrf import MSRFTransform
 

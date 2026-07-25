@@ -18,7 +18,7 @@ import numpy as np
 warnings.filterwarnings("ignore")
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.join(HERE, "..", ".."))
+sys.path.insert(0, os.path.join(HERE, ".."))  # repo root
 from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
 

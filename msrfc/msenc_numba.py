@@ -20,7 +20,7 @@ _EPS = 1e-8
 # ---------- constant banks (numpy, built once) ----------
 def build_consts(banks=None):
     if banks is None:
-        from _banks_data import load_banks
+        from ._banks_data import load_banks
         banks = load_banks()
     trf_mu = np.asarray(banks["trf_mu"], np.float64)
     trf_sig = np.asarray(banks["trf_sig"], np.float64)
