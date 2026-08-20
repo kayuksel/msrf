@@ -175,10 +175,22 @@ only so it is computable online with O(1) state per feature column (`scripts/ord
   alone. Both sides measured in the same run; see the reproducibility note below.
 - **Order alone carries most of the signal.** The three blocks with amplitude normalised away reach
   0.7815, which is the point of calling the representation a world model rather than a fingerprint.
-- **The gain is a property of the patch grid, not the data.** On the released grid the blocks *cost*
-  −0.033 on the 17 datasets short enough to yield ≤2 patches; resampling short series to a ≥24-patch
-  grid turns that into +0.006. Accuracy is flat in that target over 8–48 patches (spread 0.0023, every
-  target significant), so the constant is not load-bearing. Largest gains at 9–24 patches (+0.026).
+- **The gain is the patch grid's as much as the pooling's — read this before quoting the table.** On
+  the encoder's own **deployed** grid the same blocks are worth **+0.0000 (p=0.18)**. The +0.0115
+  appears only once short series are resampled to ≥24 patches, and it splits sharply by stratum:
+
+  | stratum | n | Δ | p |
+  |---|---|---|---|
+  | deployed (released) grid, all datasets | 113 | **+0.0000** | 0.18 |
+  | ≥24-patch grid, T≥432 (grid *bit-identical* to deployed) | 47 | **+0.0057** | 0.073 |
+  | ≥24-patch grid, T<432 (resampled) | 66 | **+0.0156** | 2.7e-4 |
+
+  So the repair is a **short-series intervention**, and it costs where it works: the 17 datasets with
+  ≤2 patches all have T≤80 and sit in the ~7× encode column, while the 47 datasets that pay only
+  1.07–1.08× are exactly the ones where the blocks are not significant. The ≥24 target is also the
+  **argmax of a 7-point sweep read off these same test sets** (0.8309/0.8319/0.8339/0.8337/**0.8342**
+  /0.8322/0.8325 at t=6/8/12/16/24/32/48), worth ≈0.001 of the gain; every target beats base at
+  p<0.01, so the constant is not manufacturing the effect, but it is selected.
 - **It does not compound with a convolutional bank.** Added to MSRF\*C2272 the blocks move accuracy
   by only +0.0008 (0.8623 → 0.8631), so they add nothing on top of the convolutional features. Why is
   unclear: MiniRocket's own PPV pool is symmetric in position too, so "the kernels already carry the
@@ -197,11 +209,12 @@ only so it is computable online with O(1) state per feature column (`scripts/ord
   L=1024).
 - **Multivariate** (UEA-17, caps n≤600/T≤1300/ch≤65): pooling the channel-concatenated stack makes
   the blocks *cross-channel* statistics rather than temporal ones. Read the numbers carefully — the
-  baseline here is the **channel-pooled** configuration (0.6758), which the paper's transfer section
-  already rejects in favour of seeded channel mixing, not the deployed multivariate form. Against
-  that baseline stacked gives 0.7098 (+0.0340, W/L/T 10/3/4, p=0.043) and the channel-symmetric
-  per-channel form +0.0069 (n.s.); the **direct** paired test between the two is +0.0271 at p=0.090,
-  so at n=17 they are not separated. The mechanism is clearest at C=2, where the halfway split lands
+  baseline here is the **channel-pooled** configuration (0.6964), which the paper's transfer section
+  already rejects in favour of seeded channel mixing, not the deployed multivariate form. On the 16
+  fixed-length sets of that protocol (JapaneseVowels is variable-length and excluded, as there):
+  stacked 0.7298 (+0.0334, W/L/T 9/3/4, **p=0.065**), per-channel 0.7026 (+0.0062, p=0.21), and the
+  direct paired test between them +0.0272 (p=0.12). **None of the three is significant** — the p=0.043
+  an earlier draft quoted depended on including the excluded 17th dataset. The mechanism is clearest at C=2, where the halfway split lands
   on a channel boundary (Libras +0.228) — but the other C=2 set, AtrialFibrillation, *loses* 0.067,
   so two channels are not sufficient for it. Seeded channel mixing already supplies cross-channel
   structure deliberately and better, so these numbers do not improve the deployed multivariate path.
