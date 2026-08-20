@@ -180,26 +180,40 @@ only so it is computable online with O(1) state per feature column (`scripts/ord
   grid turns that into +0.006. Accuracy is flat in that target over 8–48 patches (spread 0.0023, every
   target significant), so the constant is not load-bearing. Largest gains at 9–24 patches (+0.026).
 - **It does not compound with a convolutional bank.** Added to MSRF\*C2272 the blocks move accuracy
-  by +0.0008 (0.8623 → 0.8631): MiniRocket's dilated kernels already carry the order information the
-  symbolic pool discarded.
+  by only +0.0008 (0.8623 → 0.8631), so they add nothing on top of the convolutional features. Why is
+  unclear: MiniRocket's own PPV pool is symmetric in position too, so "the kernels already carry the
+  order" is not an explanation we have tested.
 - **Two passes buy nothing.** `contrast` and `earliness` are bit-identical under the prefix-only and
   global-normalised definitions; `cusum` differs by +0.0018 (p=0.43) in favour of prefix-only. The
   repair is therefore free in a streaming deployment.
-- **Cost on one core** (`scripts/profile_order.py`, threads pinned, best-of-5, 200 series): the blocks
-  themselves are free (1.02× on the released grid). All overhead is the denser grid, and it is a
-  resampling cost — `FusedOrderPoolEnc` runs φ once where the grids coincide and costs **1.07×** at
-  L=512/1024, bit-identically. Only series shorter than 432 samples pay (2.9–7×).
+- **Cost on one core** (`scripts/profile_order.py`, threads pinned, best-of-5, 200 series): reported
+  as **ratios** against a baseline re-measured in the same session — absolute times are not
+  comparable with the unpinned on-device profile, which runs 5–8× faster in wall clock. The blocks
+  themselves are close to free (1.02–1.09× at L≥256 on the released grid, 1.26× at L=128). All
+  remaining overhead is the denser grid and is purely a resampling cost: `FusedOrderPoolEnc` runs φ
+  once where the grids coincide and costs **1.07–1.08×** at L=512/1024 with bit-identical output.
+  Only series shorter than 432 samples pay (2.9–7×). The fusion is implemented for the two-pass
+  blocks only; unfused, prefix-only costs the same as globally normalised (2.05× vs 2.08× at
+  L=1024).
 - **Multivariate** (UEA-17, caps n≤600/T≤1300/ch≤65): pooling the channel-concatenated stack makes
-  the blocks *cross-channel* statistics rather than temporal ones. That is not a defect here — stacked
-  scores 0.7098 vs base 0.6758 (+0.0340, W/L 10/3, p=0.043), while the channel-symmetric per-channel
-  formulation gives only +0.0069 (n.s.). The effect is largest at 2–3 channels, where the halfway
-  split lands on a channel boundary and `contrast` becomes a clean channel difference (Libras +0.228,
-  UWaveGestureLibrary +0.160). Use per-channel if cross-channel mixing is undesirable.
+  the blocks *cross-channel* statistics rather than temporal ones. Read the numbers carefully — the
+  baseline here is the **channel-pooled** configuration (0.6758), which the paper's transfer section
+  already rejects in favour of seeded channel mixing, not the deployed multivariate form. Against
+  that baseline stacked gives 0.7098 (+0.0340, W/L/T 10/3/4, p=0.043) and the channel-symmetric
+  per-channel form +0.0069 (n.s.); the **direct** paired test between the two is +0.0271 at p=0.090,
+  so at n=17 they are not separated. The mechanism is clearest at C=2, where the halfway split lands
+  on a channel boundary (Libras +0.228) — but the other C=2 set, AtrialFibrillation, *loses* 0.067,
+  so two channels are not sufficient for it. Seeded channel mixing already supplies cross-channel
+  structure deliberately and better, so these numbers do not improve the deployed multivariate path.
+  Per-channel is the temporally correct form; combining it with seeded mixing is untested.
 - **Adapting the pooling per dataset barely pays** (two-pass arms): one fixed choice 0.8342, a
   label-free rule on (patch count, n/C) 0.8382, per-dataset selection by cross-validation on the
-  *training* split 0.8388 ± 0.0009 (2,000 random tie-breaks; CV cannot separate the arms on 20% of
-  datasets), against a test-set oracle of 0.8449. The label-free rule is within noise of the
-  CV-selected one, so the universal encoder loses almost nothing.
+  *training* split 0.8388 ± 0.0009 (2,000 random tie-breaks; CV cannot separate the arms on 23 of
+  113 datasets), against a test-set oracle **over the same two arms** of 0.8449 — a 5-arm oracle is
+  not the ceiling of a 2-arm selector. The label-free rule's thresholds are scanned in-sample;
+  de-biased by 400 split-half refits it gives +0.0131 rather than +0.0139, so per-dataset selection
+  leads by 0.0013, roughly 1.5× the tie-break noise, at the cost of making the encoder
+  dataset-dependent. `scripts/order_pool_ladder.py` reproduces all of it.
 - **Interaction with a nonlinear head.** On the order-augmented features the leaf-RFM head's edge over
   ridge shrinks by −0.0051 (p=0.041), so part of what looked like the price of linearity was this
   pooling defect; it does not vanish, and RFM still gains +0.0048 from the order columns itself, so
