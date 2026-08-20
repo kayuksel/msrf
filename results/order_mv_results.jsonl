@@ -1,0 +1,17 @@
+{"dataset": "ArticularyWordRecognition", "n_train": 275, "C_cls": 25, "n_ch": 9, "T": 144, "base": 0.9666666666666667, "stacked": 0.9666666666666667, "perchannel": 0.9833333333333333, "sec": 18.9}
+{"dataset": "AtrialFibrillation", "n_train": 15, "C_cls": 3, "n_ch": 2, "T": 640, "base": 0.2, "stacked": 0.13333333333333333, "perchannel": 0.2, "sec": 0.5}
+{"dataset": "BasicMotions", "n_train": 40, "C_cls": 4, "n_ch": 6, "T": 100, "base": 1.0, "stacked": 1.0, "perchannel": 1.0, "sec": 2.1}
+{"dataset": "Cricket", "n_train": 108, "C_cls": 12, "n_ch": 6, "T": 1197, "base": 0.9722222222222222, "stacked": 0.9861111111111112, "perchannel": 0.9722222222222222, "sec": 28.7}
+{"dataset": "ERing", "n_train": 30, "C_cls": 6, "n_ch": 4, "T": 65, "base": 0.9555555555555556, "stacked": 0.9555555555555556, "perchannel": 0.937037037037037, "sec": 4.5}
+{"dataset": "Epilepsy", "n_train": 137, "C_cls": 4, "n_ch": 3, "T": 206, "base": 0.9927536231884058, "stacked": 0.9927536231884058, "perchannel": 0.9927536231884058, "sec": 3.5}
+{"dataset": "FingerMovements", "n_train": 316, "C_cls": 2, "n_ch": 28, "T": 50, "base": 0.57, "stacked": 0.54, "perchannel": 0.56, "sec": 33.7}
+{"dataset": "HandMovementDirection", "n_train": 160, "C_cls": 4, "n_ch": 10, "T": 400, "base": 0.25675675675675674, "stacked": 0.32432432432432434, "perchannel": 0.25675675675675674, "sec": 9.1}
+{"dataset": "Handwriting", "n_train": 150, "C_cls": 26, "n_ch": 3, "T": 152, "base": 0.23058823529411765, "stacked": 0.2988235294117647, "perchannel": 0.25882352941176473, "sec": 10.4}
+{"dataset": "Heartbeat", "n_train": 204, "C_cls": 2, "n_ch": 61, "T": 405, "base": 0.7268292682926829, "stacked": 0.7414634146341463, "perchannel": 0.7414634146341463, "sec": 116.9}
+{"dataset": "JapaneseVowels", "n_train": 270, "C_cls": 9, "n_ch": 12, "T": 7, "base": 0.34594594594594597, "stacked": 0.3891891891891892, "perchannel": 0.36486486486486486, "sec": 21.8}
+{"dataset": "Libras", "n_train": 180, "C_cls": 15, "n_ch": 2, "T": 45, "base": 0.6833333333333333, "stacked": 0.9111111111111111, "perchannel": 0.7166666666666667, "sec": 2.2}
+{"dataset": "NATOPS", "n_train": 180, "C_cls": 6, "n_ch": 24, "T": 51, "base": 0.7555555555555555, "stacked": 0.7444444444444445, "perchannel": 0.7722222222222223, "sec": 25.2}
+{"dataset": "RacketSports", "n_train": 151, "C_cls": 4, "n_ch": 6, "T": 30, "base": 0.8289473684210527, "stacked": 0.881578947368421, "perchannel": 0.8355263157894737, "sec": 6.8}
+{"dataset": "SelfRegulationSCP1", "n_train": 268, "C_cls": 2, "n_ch": 6, "T": 896, "base": 0.78839590443686, "stacked": 0.8156996587030717, "perchannel": 0.7679180887372014, "sec": 29.5}
+{"dataset": "SelfRegulationSCP2", "n_train": 200, "C_cls": 2, "n_ch": 7, "T": 1152, "base": 0.5333333333333333, "stacked": 0.5444444444444444, "perchannel": 0.5277777777777778, "sec": 228.9}
+{"dataset": "UWaveGestureLibrary", "n_train": 120, "C_cls": 8, "n_ch": 3, "T": 315, "base": 0.68125, "stacked": 0.840625, "perchannel": 0.71875, "sec": 5.8}

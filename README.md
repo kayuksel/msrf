@@ -142,8 +142,81 @@ the multi-space block is decisively useful.
   pruning-then-expanding (452d, 0.8251).
 - **Low-label regime** (5 labels/class, 5 seeds): MiniRocket 0.804 > MSRF+ 0.775 >
   Rocket-10k 0.764 > catch22 0.664 — MSRF+ leads the data-independent transforms.
+- **The price of the linear head** (113 datasets): swapping the ridge readout for a leaf-RFM head
+  (xRFM, ICLR 2026 — kernel ridge with iterated AGOP feature reweighting) on the *same* frozen
+  MSRF+ 519 dims gives 0.8240 → 0.8365 (+0.0125, W/L 57/40, p=0.006); +0.032 (p=1.3e-5) on the 43
+  datasets with ≥300 training series, −0.013 on the smallest (n<100). A control head with identical
+  selection machinery but no feature learning does not explain it (RFM beats that control by
+  +0.0177, p=0.0009), so what the linear head forgoes is per-dataset *feature learning*, not tuning
+  capacity. The linear head is a deployment choice — exact attribution, rank-one personalisation, no
+  support set to store — and this is its measured price. `scripts/run_rfm_head.py`
 - **Head cost:** ridge fitting is sub-second at every width (n=500: 0.03–0.04 s at 760–5,120
   dims; 0.17 s at 50k); feature memory at n=1000: 18 MB (MSRF\*C) vs 0.4 GB (MultiRocket).
+
+## Order-sensitive pooling
+
+`MultiSpaceEncCore._pool` is `concat([mean, std, max])` over the patch axis. All three are symmetric
+functions of the patch multiset, so **MSRF+519 is provably invariant to any reordering of patches**
+above the 64-sample window: it cannot distinguish a stream that rises then falls from one that falls
+then rises. Three order-sensitive pooling statistics fix it, each defined from *prefix* statistics
+only so it is computable online with O(1) state per feature column (`scripts/order_pool_online.py`):
+
+| pooling | dims | accuracy | vs 519-d | W/L/T | p |
+|---|---|---|---|---|---|
+| MSRF+519 (this stack) | 519 | 0.8244 | — | — | — |
+| + `contrast` (pre/post) | 692 | 0.8304 | +0.0060 | 62/35/16 | 0.0023 |
+| + `earliness` (running-max envelope) | 692 | 0.8314 | +0.0070 | 61/33/19 | 5.1e-4 |
+| + `cusum` (centred excursion range) | 692 | **0.8348** | +0.0105 | 71/25/17 | 1.1e-5 |
+| + all three | 1,038 | **0.8358** | +0.0115 | 69/31/13 | 9.5e-5 |
+| order blocks **alone** (amplitude divided out) | 519 | 0.7815 | −0.0428 | 28/77/8 | 5.7e-6 |
+
+- **Pareto point:** `cusum` at 692 dims (0.8348) beats MSRF\*760 at 760 dims (0.8323 on this stack)
+  by +0.0025, W/L 63/41, p=0.038 — better accuracy from fewer dimensions, from a pooling change
+  alone. Both sides measured in the same run; see the reproducibility note below.
+- **Order alone carries most of the signal.** The three blocks with amplitude normalised away reach
+  0.7815, which is the point of calling the representation a world model rather than a fingerprint.
+- **The gain is a property of the patch grid, not the data.** On the released grid the blocks *cost*
+  −0.033 on the 17 datasets short enough to yield ≤2 patches; resampling short series to a ≥24-patch
+  grid turns that into +0.006. Accuracy is flat in that target over 8–48 patches (spread 0.0023, every
+  target significant), so the constant is not load-bearing. Largest gains at 9–24 patches (+0.026).
+- **It does not compound with a convolutional bank.** Added to MSRF\*C2272 the blocks move accuracy
+  by +0.0008 (0.8623 → 0.8631): MiniRocket's dilated kernels already carry the order information the
+  symbolic pool discarded.
+- **Two passes buy nothing.** `contrast` and `earliness` are bit-identical under the prefix-only and
+  global-normalised definitions; `cusum` differs by +0.0018 (p=0.43) in favour of prefix-only. The
+  repair is therefore free in a streaming deployment.
+- **Cost on one core** (`scripts/profile_order.py`, threads pinned, best-of-5, 200 series): the blocks
+  themselves are free (1.02× on the released grid). All overhead is the denser grid, and it is a
+  resampling cost — `FusedOrderPoolEnc` runs φ once where the grids coincide and costs **1.07×** at
+  L=512/1024, bit-identically. Only series shorter than 432 samples pay (2.9–7×).
+- **Multivariate** (UEA-17, caps n≤600/T≤1300/ch≤65): pooling the channel-concatenated stack makes
+  the blocks *cross-channel* statistics rather than temporal ones. That is not a defect here — stacked
+  scores 0.7098 vs base 0.6758 (+0.0340, W/L 10/3, p=0.043), while the channel-symmetric per-channel
+  formulation gives only +0.0069 (n.s.). The effect is largest at 2–3 channels, where the halfway
+  split lands on a channel boundary and `contrast` becomes a clean channel difference (Libras +0.228,
+  UWaveGestureLibrary +0.160). Use per-channel if cross-channel mixing is undesirable.
+- **Adapting the pooling per dataset barely pays** (two-pass arms): one fixed choice 0.8342, a
+  label-free rule on (patch count, n/C) 0.8382, per-dataset selection by cross-validation on the
+  *training* split 0.8388 ± 0.0009 (2,000 random tie-breaks; CV cannot separate the arms on 20% of
+  datasets), against a test-set oracle of 0.8449. The label-free rule is within noise of the
+  CV-selected one, so the universal encoder loses almost nothing.
+- **Interaction with a nonlinear head.** On the order-augmented features the leaf-RFM head's edge over
+  ridge shrinks by −0.0051 (p=0.041), so part of what looked like the price of linearity was this
+  pooling defect; it does not vanish, and RFM still gains +0.0048 from the order columns itself, so
+  the two are complementary. `results/rfm_order_results.jsonl`
+
+### Reproducibility note
+
+The published per-dataset column (`results/unified_protocol_results.jsonl`, key `MSRF+519`) was
+produced on an older library stack. The encoder is deterministic and its features are bit-identical
+here, but `RidgeClassifierCV`'s alpha selection is not stable across scikit-learn versions: 24 of 113
+datasets land on a different alpha, so the archive mean re-measures at 0.8244 rather than 0.8240. The
+difference is unbiased (13 datasets higher, 11 lower, Wilcoxon p=0.22, median |Δ| 0.0016 among those
+that differ). Every comparison above is a **paired** delta measured within a single run, so this does
+not affect any reported gain; `scripts/run_baseline_recheck.py` re-measures both baselines on the
+current stack for the Pareto comparison. `results/rfm_head_results.jsonl` was likewise produced on
+the older stack (its ridge column matches `MSRF+519` on all 113 datasets); the order-pooling and
+RFM-interaction results in `results/rfm_order_results.jsonl` were produced on the current one.
 
 ## Reproduce everything
 
@@ -156,6 +229,17 @@ python scripts/run_complementarity.py --cache ./ucr_cache   # combination table
 python scripts/run_significance.py                          # all Wilcoxon tables from results/
 python scripts/run_saturation.py --cache ./ucr_cache        # saturation analyses
 python scripts/run_runtime.py                               # latency + head-cost table
+python scripts/run_rfm_head.py --cache ./ucr_cache          # linear-head price: ridge vs OOF-control vs leaf-RFM
+python scripts/run_order_pool_online.py --cache ./ucr_cache  # order-sensitive pooling (prefix-only blocks)
+python scripts/run_order_pool_fine.py --cache ./ucr_cache    # same, global-normalised (two-pass) blocks
+python scripts/run_order_pool.py --cache ./ucr_cache         # blocks on the released patch grid
+python scripts/run_target_sweep.py --cache ./ucr_cache       # sensitivity to the resampling target
+python scripts/run_order_union.py --cache ./ucr_cache        # do the blocks add to MSRF*C2272?
+python scripts/run_pool_select.py --cache ./ucr_cache        # per-dataset vs label-free pooling choice
+python scripts/run_order_mv.py --cache ./uea_cache           # multivariate: stacked vs per-channel
+python scripts/run_rfm_order.py --cache ./ucr_cache          # leaf-RFM on order-augmented features
+python scripts/run_baseline_recheck.py --cache ./ucr_cache   # re-measure MSRF+519 / MSRF*760 on this stack
+python scripts/profile_order.py                              # encode latency of the repair, one core
 python scripts/make_figures.py                              # regenerates plots/ from results/
 ```
 
@@ -163,7 +247,8 @@ macOS note: prefix baseline/combination runs with `OMP_NUM_THREADS=1
 NUMBA_THREADING_LAYER=workqueue` (torch + numba threading deadlock in one process otherwise).
 
 Per-dataset records behind every table: `results/unified_protocol_results.jsonl` and
-`results/complementarity_results.jsonl` (one JSON row per dataset, one key per method).
+`results/complementarity_results.jsonl` (one JSON row per dataset, one key per method); `results/rfm_head_results.jsonl` carries the
+three readouts per dataset with the RFM head's selected kernel, AGOP iteration count and fit time.
 
 ## Repository layout
 
